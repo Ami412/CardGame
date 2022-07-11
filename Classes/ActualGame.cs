@@ -10,9 +10,11 @@
             Player1 = new Player(player1name);
             Player2 = new Player(player2name);
 
-            var cards = Decker.CreateCards(); //Returns a shuffled set of cards
+            //Returns a shuffled set of cards
+            var cards = Decker.CreateCards();
 
-            var deck = Player1.Deal(cards); //Returns Player2's deck.  Player1 keeps his.
+            //Returns Player2's deck.  Player1 has his deck already.
+            var deck = Player1.Deal(cards); 
             Player2.Deck = deck;
         }
 
@@ -48,11 +50,12 @@
             pool.Enqueue(player1card);
             pool.Enqueue(player2card);
 
-            Console.WriteLine(Player1.Name + " plays " + player1card.ShortName + ", " + Player2.Name + " plays " + player2card.ShortName);
+            Console.WriteLine(Player1.Name + " has " + player1card.ShortName + ", " + Player2.Name + " has " + player2card.ShortName);
 
             while (player1card.Value == player2card.Value)
             {
-                Console.WriteLine("WAR!");
+                Console.WriteLine("Let's play WAR!");
+
                 if (Player1.Deck.Count < 4)
                 {
                     Player1.Deck.Clear();
@@ -77,7 +80,7 @@
                 pool.Enqueue(player1card);
                 pool.Enqueue(player2card);
 
-                Console.WriteLine(Player1.Name + " plays " + player1card.ShortName + ", " + Player2.Name + " plays " + player2card.ShortName);
+                Console.WriteLine(Player1.Name + " has " + player1card.ShortName + ", " + Player2.Name + " has " + player2card.ShortName);
             }
 
             if (player1card.Value < player2card.Value)

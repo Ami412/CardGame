@@ -8,19 +8,20 @@ namespace CardGame
         {
             int totalTurnCount = 0, finiteGameCount = 0;
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 1; i++)
             {
                 //Create game
-                ActualGame game = new("Alice", "Bob");
+                ActualGame game = new("Jack", "Joe");
+
                 while (!game.IsEndOfGame())
                 {
                     game.PlayTurn();
-                }
 
-                if (game.TurnCount < 20)
-                {
-                    totalTurnCount += game.TurnCount;
-                    finiteGameCount++;
+                    if (game.TurnCount < 20)
+                    {
+                        totalTurnCount += game.TurnCount;
+                        finiteGameCount++;
+                    }
                 }
             }
 

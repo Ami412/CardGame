@@ -5,6 +5,7 @@
         public static Queue<Card> CreateCards()
         {
             Queue<Card> cards = new Queue<Card>();
+
             for (int i = 2; i <= 14; i++)
             {
                 foreach (Suit suit in Enum.GetValues(typeof(Suit)))
@@ -17,28 +18,26 @@
                     });
                 }
             }
-            return Shuffle(cards);
+            return ShuffleCards(cards);
         }
 
-        private static Queue<Card> Shuffle(Queue<Card> cards)
+        private static Queue<Card> ShuffleCards(Queue<Card> cards)
         {
-            //Shuffle the existing cards using Fisher-Yates Modern
-            List<Card> transformedCards = cards.ToList();
+            List<Card> listOfCards = cards.ToList();
             Random r = new(DateTime.Now.Millisecond);
-            for (int n = transformedCards.Count - 1; n > 0; --n)
-            {
-                //Step 2: Randomly pick a card which has not been shuffled
-                int k = r.Next(n + 1);
 
-                //Step 3: Swap the selected item with the last "unselected" card in the collection
-                Card temp = transformedCards[n];
-                transformedCards[n] = transformedCards[k];
-                transformedCards[k] = temp;
+            for (int i = listOfCards.Count - 1; i > 0; --i)
+            {
+                int k = r.Next(i + 1);
+
+                Card temp = listOfCards[i];
+                listOfCards[i] = listOfCards[k];
+                listOfCards[k] = temp;
             }
 
             Queue<Card> shuffledCards = new();
 
-            foreach (var card in transformedCards)
+            foreach (var card in listOfCards)
             {
                 shuffledCards.Enqueue(card);
             }
